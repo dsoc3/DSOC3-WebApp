@@ -30,7 +30,8 @@ pipeline {
             when {
                // branch 'origin/test1'
                expression {
-                return env.GIT_BRANCH == 'origin/test1'
+                //return env.GIT_BRANCH == 'origin/test1'
+                return params.BRANCH == 'test'
                }
             }
             steps {
