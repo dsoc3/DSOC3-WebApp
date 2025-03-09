@@ -2,7 +2,18 @@
 pipeline {
 // Parameters  Block
     parameters{
-        string(name: 'BRANCH', defaultValue: 'main', description: 'Branch to Deploy')
+        // Strin Input
+        string(
+            name: 'BRANCH', 
+            defaultValue: 'main', 
+            description: 'Branch to Deploy'
+            )
+        // Choice Params
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'test', 'stage', 'prod'],
+            description: 'Select The en to ENVIRONMENT to Deploy'
+        )
     }
     agent any
     stages {
@@ -31,7 +42,7 @@ pipeline {
                // branch 'origin/test1'
                expression {
                 //return env.GIT_BRANCH == 'origin/test1'
-                return params.BRANCH == 'test'
+                return params.BRANCH == 'test' &&  params.ENVIRONMENT == 'stage'
                }
             }
             steps {
